@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class PHS_Movement : MonoBehaviour
 {
+    [SerializeField] private PlayerInput input;
+
     [SerializeField] private float baseMovementSpeed;
     [SerializeField] private float runMultiplier;
 
@@ -32,37 +34,34 @@ public class PHS_Movement : MonoBehaviour
         camera = Camera.main;
     }
 
-    /*private void Update()
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void Update()
     {
         CheckInput();
         DoJump();
-        CheckShoot();
+        //CheckShoot();
         DoShoot();
         CheckLanding();
         DoLandingTimer();
         CheckGrounded();
     }
-    }*/
 
     private void FixedUpdate()
     {
         DoMovement();
     }
 
-    /*private void CheckInput()
+    private void CheckInput()
     {
-        //movementInput.x = Input.GetAxisRaw("Horizontal");
-        //movementInput.y = Input.GetAxisRaw("Vertical");
-
-        //if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isSprinting = true;
-        }
-        else
-        {
-            isSprinting = false;
-        }
-    }*/
+        movementInput.x = input.LeftRight;
+        movementInput.y = input.Jump.y;
+        Debug.Log(movementInput);
+    }
 
     /*private void CheckShoot()
     {
@@ -100,10 +99,11 @@ public class PHS_Movement : MonoBehaviour
         if (wasLandedLastFrame == false && isGrounded && landingTimer <= 0f)
         {
             // just landed after jump
-            Debug.Log("landed");
             wasLandedLastFrame = true;
             camera.DORestart();
             camera.DOShakePosition(1f, 1f);
+            transform.DOShakeScale(2f);
+
         }
     }
 
@@ -111,7 +111,6 @@ public class PHS_Movement : MonoBehaviour
     {
         if (landingTimer <= 0f)
         {
-            Debug.Log("landing timer is 0");
             landingTimer = 0f;
         }
         else
@@ -135,7 +134,6 @@ public class PHS_Movement : MonoBehaviour
 
     private void CheckGrounded()
     {
-        Debug.Log("isgrounded");
         isGrounded =  Physics2D.Raycast(transform.position, -transform.up, groundCheckRayLength, groundLayer);
     }
 }
