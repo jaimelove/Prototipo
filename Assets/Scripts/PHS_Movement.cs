@@ -25,25 +25,25 @@ public class PHS_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    /*private void Update()
     {
         CheckInput();
         DoJump();
         CheckShoot();
         DoShoot();
-    }
+    }*/
 
     private void FixedUpdate()
     {
         DoMovement();
     }
 
-    private void CheckInput()
+    /*private void CheckInput()
     {
-        movementInput.x = Input.GetAxisRaw("Horizontal");
-        movementInput.y = Input.GetAxisRaw("Vertical");
+        //movementInput.x = Input.GetAxisRaw("Horizontal");
+        //movementInput.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        //if (Input.GetKey(KeyCode.LeftShift))
         {
             isSprinting = true;
         }
@@ -51,15 +51,15 @@ public class PHS_Movement : MonoBehaviour
         {
             isSprinting = false;
         }
-    }
+    }*/
 
-    private void CheckShoot()
+    /*private void CheckShoot()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             isShooting = true;
         else
             isShooting = false;
-    }
+    }*/
 
     private void DoShoot()
     {
