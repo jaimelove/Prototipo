@@ -32,7 +32,7 @@ public class PHS_Movement : MonoBehaviour
         camera = Camera.main;
     }
 
-    private void Update()
+    /*private void Update()
     {
         CheckInput();
         DoJump();
@@ -42,18 +42,19 @@ public class PHS_Movement : MonoBehaviour
         DoLandingTimer();
         CheckGrounded();
     }
+    }*/
 
     private void FixedUpdate()
     {
         DoMovement();
     }
 
-    private void CheckInput()
+    /*private void CheckInput()
     {
-        movementInput.x = Input.GetAxisRaw("Horizontal");
-        movementInput.y = Input.GetAxisRaw("Vertical");
+        //movementInput.x = Input.GetAxisRaw("Horizontal");
+        //movementInput.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        //if (Input.GetKey(KeyCode.LeftShift))
         {
             isSprinting = true;
         }
@@ -61,15 +62,15 @@ public class PHS_Movement : MonoBehaviour
         {
             isSprinting = false;
         }
-    }
+    }*/
 
-    private void CheckShoot()
+    /*private void CheckShoot()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             isShooting = true;
         else
             isShooting = false;
-    }
+    }*/
 
     private void DoShoot()
     {
