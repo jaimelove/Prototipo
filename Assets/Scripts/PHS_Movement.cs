@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PHS_Movement : MonoBehaviour
 {
@@ -19,10 +20,16 @@ public class PHS_Movement : MonoBehaviour
     private Vector2 movementInput = new Vector2();
     private bool isSprinting = false;
     private bool isShooting = false;
+    private bool wasLandedLastFrame = true;
+    private float landingTimer = 0f;
+    private bool isGrounded = true;
+
+    private Camera camera;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        camera = Camera.main;
     }
 
     private void Update()
@@ -31,6 +38,9 @@ public class PHS_Movement : MonoBehaviour
         DoJump();
         CheckShoot();
         DoShoot();
+        CheckLanding();
+        DoLandingTimer();
+        CheckGrounded();
     }
 
     private void FixedUpdate()
@@ -72,9 +82,41 @@ public class PHS_Movement : MonoBehaviour
 
     private void DoJump()
     {
-        if (movementInput.y > 0.2f && IsGrounded())
+        if (movementInput.y > 0.2f && isGrounded)
         {
+            Debug.Log("jump");
+            wasLandedLastFrame = false;
+            landingTimer = 0.5f;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Abs(movementInput.y * jumpStrength));
+            camera.DORestart();
+            camera.DOShakePosition(1f, 0.5f);
+            //transform.DOPunchScale(new Vector3(0f, 0.3f, 0f), 5f);
+        }
+    }
+
+    private void CheckLanding()
+    {
+        if (wasLandedLastFrame == false && isGrounded && landingTimer <= 0f)
+        {
+            // just landed after jump
+            Debug.Log("landed");
+            wasLandedLastFrame = true;
+            camera.DORestart();
+            camera.DOShakePosition(1f, 1f);
+        }
+    }
+
+    private void DoLandingTimer()
+    {
+        if (landingTimer <= 0f)
+        {
+            Debug.Log("landing timer is 0");
+            landingTimer = 0f;
+        }
+        else
+        {
+            //Debug.Log(landingTimer);
+            landingTimer -= Time.deltaTime;
         }
     }
 
@@ -90,9 +132,9 @@ public class PHS_Movement : MonoBehaviour
         rb.velocity = new Vector2(movementInput.x * moveSpeed, rb.velocity.y);
     }
 
-    private bool IsGrounded()
+    private void CheckGrounded()
     {
-        return Physics2D.Raycast(transform.position, -transform.up, groundCheckRayLength, groundLayer);
-
+        Debug.Log("isgrounded");
+        isGrounded =  Physics2D.Raycast(transform.position, -transform.up, groundCheckRayLength, groundLayer);
     }
 }
