@@ -1519,6 +1519,7 @@ GameObject:
   - component: {fileID: 1289668941}
   - component: {fileID: 1289668940}
   - component: {fileID: 1289668939}
+  - component: {fileID: 1289668944}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1538,6 +1539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59e87601f03c1a4c8a0290de6116192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 1289668944}
   baseMovementSpeed: 10
   runMultiplier: 2
   jumpStrength: 13
@@ -1661,6 +1663,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1289668944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289668938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821a2f13d1964194aa6da6ea04d2f095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveRight: 0
+  MoveLeft: 0
+  Jump: {x: 0, y: 0}
+  LeftRight: 0
 --- !u!1 &1522599904
 GameObject:
   m_ObjectHideFlags: 0
