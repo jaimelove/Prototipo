@@ -103,7 +103,7 @@ public class PHS_Movement : MonoBehaviour
             camera.DORestart();
             camera.DOShakePosition(1f, 1f);
             transform.DOShakeScale(2f);
-
+            GetComponent<AudioSource>().Play();
         }
     }
 
